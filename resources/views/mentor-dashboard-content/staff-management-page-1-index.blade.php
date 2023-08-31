@@ -40,67 +40,6 @@
                 }, 1000);
         </script>
     @endif
-
-
-
-    {{-- <div class="card">
-        <div class="card-body">
-
-            <h3 class="panel-title" style="text-align:center;">Register Students</h3>
-            <br>
-
-            <form action="/insert-staff-data" method="POST">
-                {{ csrf_field() }}
-                <div class="form-row">
-
-                    <div class="col-md-4 mb-3">
-                        <label for="staff_id">Roll No.</label>
-                        <input type="text" class="form-control" id="staff_id" name="staff_id"
-                            placeholder="Enter Roll No." autocomplete="off" required>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label for="first_name">First Name</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name"
-                            placeholder="Enter First Name" autocomplete="off" required>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label for="last_name">Last Name</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name"
-                            placeholder="Enter Last Name" autocomplete="off" required>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label for="date_of_birth">Date of Birth</label>
-                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"
-                            autocomplete="off" required>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label for="email">BIT Sathy mail</label>
-                        <input type="email" class="form-control" id="email" name="email"
-                            placeholder="Enter Email Address" autocomplete="off" required>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label for="phone_number">Phone Number</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number"
-                            placeholder="Enter Phone Number" autocomplete="off" required>
-                    </div>
-
-                    {{-- <div class="col-md-4 mb-3">
-              <label for="position">Position</label>
-              <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position/Role" required>
-            </div> --}}
-
-                {{--</div>
-                <input class="btn btn-lg btn-primary" value="Register" type="submit">
-            </form>
-
-        </div>
-    </div> --}}
-
     <br>
 
     <div class="card">
@@ -139,14 +78,6 @@
 
                 </tbody>
             </table>
-            {{-- <form action="/import-data" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="input-group  col-sm-8">
-                    <input type="file" name="xlupload" class="col-sm-5">
-                    <button class="btn btn-outline-primary" type="submit">Upload</button>
-                </div>
-            </form> --}}
-
         </div>
     </div>
 

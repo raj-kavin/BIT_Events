@@ -84,12 +84,6 @@
               <label for="phone_number">Phone Number</label>
               <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter Phone Number" value="{{$staff_data[0]->phone_number}}" autocomplete="off" required>
             </div>
-
-            {{-- <div class="col-md-4 mb-3">
-              <label for="position">Position</label>
-              <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position/Role" value="{{$staff_data[0]->position}}" required>
-            </div>--}}
-
           </div>
 
           <input type="hidden" name="auto_id" value="{{$staff_data[0]->auto_id}}" />

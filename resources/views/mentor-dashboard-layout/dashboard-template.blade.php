@@ -35,18 +35,6 @@
             background-color: black;
             /* font-size: 152px */
         }
-<<<<<<< HEAD
-        .side-nav-closed{
-            margin-left:8%
-        }
-        .nav-item.active {
-            background-color:rgba(206, 204, 204, 0.566);
-            border-radius: 20px;
-
-            /* Replace with your desired color */
-        }
-=======
->>>>>>> ad2109f590cdb91a59b0210fb3774f9105417342
 
         .side-nav-closed {
             margin-left: 8%
@@ -273,18 +261,6 @@
         }
 
     </script>
-<<<<<<< HEAD
-    <script>
-        $(document).ready(function() {
-
-            var path = window.location.pathname;
-
-            $('.nav-item a[href="' + path + '"]').parent().addClass('active');
-        });
-    </script>
-=======
-
->>>>>>> ad2109f590cdb91a59b0210fb3774f9105417342
 </body>
 
 </html>
