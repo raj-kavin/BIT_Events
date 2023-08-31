@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use data;
-
 use Exception;
 use App\Mail\MailNotify;
 use Illuminate\Http\Request;
@@ -15,7 +14,10 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\leave_data;
-use PDO;
+use Intervention\Image\Facades\Image;
+use GuzzleHttp\Client;
+
+
 
 class DatabaseController extends Controller
 {
@@ -34,23 +36,36 @@ class DatabaseController extends Controller
                 'date_of_birth' => 'required',
                 'email' => 'required',
                 'phone_number' => 'required|min:10|max:10',
+                'image' => 'required'
                 //   'position' => 'required',
             ]);
 
-            $staff_id       = $request->staff_id;
-            $first_name     = $request->first_name;
-            $last_name      = $request->last_name;
-            $date_of_birth  = $request->date_of_birth;
-            $email          = $request->email;
-            $phone_number   = $request->phone_number;
+            $staff_id = $request->staff_id;
+            $first_name = $request->first_name;
+            $last_name = $request->last_name;
+            $date_of_birth = $request->date_of_birth;
+            $email = $request->email;
+            $phone_number = $request->phone_number;
             // $position       = $request->position;
+
+            // Rename the uploaded file to the student ID
+            $uploadedFile = $request->file('image');
+            $originalFilename = $uploadedFile->getClientOriginalName();
+            $extension = $uploadedFile->getClientOriginalExtension();
+            $newFilename = $staff_id . '.' . $extension;
+
+            // Store the file with the new filename
 
 
             if (DB::table('staff_data')->where('staff_id', $staff_id)->doesntExist()) {
 
                 if (DB::insert('INSERT INTO staff_data (staff_id, firstname, lastname, dob, email, phone_number) values (?, ?, ?, ?, ?, ?)', [$staff_id, $first_name, $last_name, $date_of_birth, $email, $phone_number])) {
 
-                    return redirect()->back()->with('message', 'Registeration is Successful.');
+                    if ($imagePath = $uploadedFile->storeAs('student_images', $newFilename, 'public')) {
+                        return redirect()->back()->with('message', 'Registeration is Successful.');
+                    }
+
+
                 }
             } else {
                 return redirect()->back()->withErrors("<strong>Unable to register:</strong> The given staff ID already exists in the database");
@@ -92,12 +107,12 @@ class DatabaseController extends Controller
                 //   'position' => 'required',
             ]);
 
-            $auto_id        = $request->auto_id;
-            $first_name     = $request->first_name;
-            $last_name      = $request->last_name;
-            $date_of_birth  = $request->date_of_birth;
-            $email          = $request->email;
-            $phone_number   = $request->phone_number;
+            $auto_id = $request->auto_id;
+            $first_name = $request->first_name;
+            $last_name = $request->last_name;
+            $date_of_birth = $request->date_of_birth;
+            $email = $request->email;
+            $phone_number = $request->phone_number;
             // $position       = $request->position;
 
 
@@ -282,9 +297,9 @@ class DatabaseController extends Controller
             ]);
 
 
-            $username  =  $request->username;
-            $password  =  $request->password;
-            $auto_id   =  $request->auto_id;
+            $username = $request->username;
+            $password = $request->password;
+            $auto_id = $request->auto_id;
 
             if (DB::table('user_account')->where('auto_id', $auto_id)->update(['username' => $username, 'password' => $password])) {
 
@@ -325,33 +340,42 @@ class DatabaseController extends Controller
         if ($session_type == "sadmin") {
 
             $validatedata = $request->validate([
-                'user_id' => 'required',
+                'staff_id' => 'required',
                 'username' => 'required',
                 'password' => 'required',
                 'acc_type' => 'required',
             ]);
 
-            $staff_id  =  $request->staff_id;
-            $username  =  $request->username;
-            $password  =  $request->password;
-            $acc_type  =  $request->acc_type;
+            $staff_id = $request->staff_id;
+            $username = $request->username;
+            $password = $request->password;
+            $acc_type = $request->acc_type;
+            $image = $request->photoStore;
 
 
-            if (DB::table('user_account')->where('staff_id', $staff_id)->doesntExist()) {
+            $imageData = base64_decode($image);
 
-                if (DB::table('user_account')->where('username', $username)->doesntExist()) {
+            $uploadimage = Image::make($imageData);
 
-                    if (DB::insert('INSERT INTO user_account (staff_id, username, password, account_type) values (?, ?, ?, ?)', [$staff_id, $username, $password, $acc_type])) {
+            $filename = $staff_id . '.png';
 
-                        return redirect()->back()->with('message', 'Account creation is Successful.');
+            if ($uploadimage->save(storage_path('/app/public/student_images/' . $filename))) {
+
+                if (DB::table('user_account')->where('staff_id', $staff_id)->doesntExist()) {
+
+                    if (DB::table('user_account')->where('username', $username)->doesntExist()) {
+
+                        if (DB::insert('INSERT INTO user_account (staff_id, username, password, account_type, image) values (?, ?, ?, ?, ?)', [$staff_id, $username, $password, $acc_type, $filename])) {
+                            return redirect()->back()->with('message', 'Account creation is Successful.');
+                        }
+                    } else {
+
+                        return redirect()->back()->withErrors("<strong>Unable to create:</strong> The given username already exists in the database.");
                     }
                 } else {
 
-                    return redirect()->back()->withErrors("<strong>Unable to create:</strong> The given username already exists in the database.");
+                    return redirect()->back()->withErrors("<strong>Unable to create:</strong> The staff already has an account");
                 }
-            } else {
-
-                return redirect()->back()->withErrors("<strong>Unable to create:</strong> The staff already has an account");
             }
         }
     }
@@ -650,13 +674,12 @@ class DatabaseController extends Controller
         $Time = now()->format('h:i A');
 
         // Define the two time ranges
-        $timeRange1Start = now()->setTime(8, 0, 0);    // 8:00 AM
-        $timeRange1End = now()->setTime(8, 45, 0);     // 8:45 AM
-        $timeRange2Start = now()->setTime(12, 0, 0);  // 12:30 PM
-        $timeRange2End = now()->setTime(18, 30, 0);
+        $timeRange1Start = now()->setTime(8, 0, 0); // 8:00 AM
+        $timeRange1End = now()->setTime(11, 45, 0); // 8:45 AM
+        $timeRange2Start = now()->setTime(12, 0, 0); // 12:30 PM
+        $timeRange2End = now()->setTime(24, 30, 0);
         // $timeRange3Start = now()->setTime(19, 0, 0);  // 12:30 PM
         // $timeRange3End = now()->setTime(20, 0, 0);    // 1:30 PM
-
 
         if (
             ($currentTime >= $timeRange1Start && $currentTime <= $timeRange1End) ||
@@ -666,11 +689,66 @@ class DatabaseController extends Controller
 
             if ($session_type == "staff" || $session_type == "student") {
 
-                $staff_id          =  $session_value;
-                $date_of_request   =  date('Y-m-d');
-                $request_time   =  $Time;
-                $session_type           =  $session_type;
+                $staff_id = $session_value;
+                $date_of_request = date('Y-m-d');
+                $request_time = $Time;
+                // $session_type = $session_type;
                 $userIp = $request->ip();
+
+                $image2 = $request->photoStore;
+
+                $imageData = base64_decode($image2);
+
+                $markedimage = Image::make($imageData);
+
+                $filename = uniqid() . '.png';
+
+                $markedimage->save(storage_path('/app/public/markedimages/' . $filename));
+                $sessionimage = Session::get('Session_image');
+                $imagepath1 = storage_path('/app/public/student_images/'. $sessionimage);
+                $imagepath2 = storage_path('/app/public/markedimages/' . $filename);
+
+                $data1 = [
+                    [
+                        'name' => 'image1',
+                        'contents' => file_get_contents($imagepath1),
+                        'filename' => 'image1.png' // Adjust the filename as needed
+                    ],
+                    [
+                        'name' => 'image2',
+                        'contents' => file_get_contents($imagepath2),
+                        'filename' => 'image2.png' // Adjust the filename as needed
+                    ]
+                ];
+
+                $flaskServerUrl = 'http://localhost:5000/compare';
+                $client = new Client();
+                $response = $client->post($flaskServerUrl, [
+                    'multipart' => $data1
+                ]);
+
+                $data = json_decode($response->getBody(), true);
+
+                File::delete($imagepath2);
+                if (isset($data['result'])) {
+                    if ($data['result'] === "nofaces") {
+                        return redirect()->back()->withErrors("No Face Detected");
+                    } else {
+                        if ($data['result'] === "same") {
+                            if (DB::insert("INSERT INTO leave_data (staff_id, date_of_request ,session ,request_time ) values (?,? ,?, ?)", [$staff_id, $date_of_request, $session_type, $request_time])) {
+                                return redirect()->back()->with('message', $userIp);
+                            }
+                        } else if($data['result'] === "notclear"){
+                            return redirect()->back()->withErrors("Photo not clear");
+                        }
+                        else{
+                            return redirect()->back()->withErrors("Face Did not match");
+                        }
+                    }
+                } else {
+                    return redirect()->back()->withErrors("Some Internal Error");
+                }
+
 
                 if (DB::insert("INSERT INTO leave_data (staff_id, date_of_request ,session ,request_time ) values (?,? ,?, ?)", [$staff_id, $date_of_request, $session_type, $request_time])) {
                     return redirect()->back()->with('message', $userIp);
@@ -714,10 +792,10 @@ class DatabaseController extends Controller
                 'venue' => 'required'
             ]);
 
-            $eventname  =  $request->eventname;
-            $fromdate  =  $request->fromdate;
-            $todate  =  $request->todate;
-            $venue  =  $request->venue;
+            $eventname = $request->eventname;
+            $fromdate = $request->fromdate;
+            $todate = $request->todate;
+            $venue = $request->venue;
 
 
 
@@ -751,11 +829,11 @@ class DatabaseController extends Controller
 
 
 
-            $S_id        =  $session_id;
-            $eventname  =  $Eventname;
-            $fromdate  =  $From_date;
-            $todate  =  $To_date;
-            $venue  =  $Venue;
+            $S_id = $session_id;
+            $eventname = $Eventname;
+            $fromdate = $From_date;
+            $todate = $To_date;
+            $venue = $Venue;
 
 
             // if (DB::insert('INSERT INTO leave_data (staff_id, type_of_leave, description, from_date, to_date, session,proof,  date_of_request, approval_status ) values (?, ?, ?, ?, ?, ?,?,?,?)', [$staff_id, $type_of_leave, $description, $from_date, $to_date, $session, $proof, $date_of_request, $approval_status])) {
@@ -788,39 +866,91 @@ class DatabaseController extends Controller
                 'venuename' => 'required'
             ]);
 
-            $eventname  =  $request->eventname;
-            $fdate  =  $request->fdate;
-            $tdate  =  $request->tdate;
-            $venue  =  $request->venue;
+            $eventname = $request->eventname;
+            $fdate = $request->fdate;
+            $tdate = $request->tdate;
+            $venue = $request->venue;
             $venuename = $request->venuename;
             $userid = $session_id;
             $username = $session_value;
             $approval_status = "[PENDING]";
 
 
-
-
-
-            if ($eventname != 'NILL' && DB::insert('INSERT INTO eventsapprovals ( event_name , F_date,T_date, event_venue ,User_Id , User_Name ,Approval_Status) values (?, ? , ? , ? , ? , ? , ?)', [$eventname, $fdate, $tdate, $venue , $userid , $username ,$approval_status])) {
+            if ($eventname != 'NILL' && DB::insert('INSERT INTO eventsapprovals ( event_name , F_date,T_date, event_venue ,User_Id , User_Name ,Approval_Status) values (?, ? , ? , ? , ? , ? , ?)', [$eventname, $fdate, $tdate, $venue, $userid, $username, $approval_status])) {
 
                 if ($venuename != 'NILL') {
 
-                    DB::insert('INSERT INTO venueapprovals ( venue_name,User_Id , User_Name ,Approval_Status) values (?,? , ?,?)', [$venuename , $userid, $username ,$approval_status]);
+                    DB::insert('INSERT INTO venueapprovals ( venue_name,User_Id , User_Name ,Approval_Status) values (?,? , ?,?)', [$venuename, $userid, $username, $approval_status]);
                 }
 
                 return redirect()->back()->with('message', 'Event creation is Successful.');
 
-            } elseif($venuename != 'NILL' && DB::insert('INSERT INTO venueapprovals ( venue_name , User_Id,User_Name,Approval_Status) values (? ,?, ? , ?)', [$venuename , $userid, $username,$approval_status])) {
+            } elseif ($venuename != 'NILL' && DB::insert('INSERT INTO venueapprovals ( venue_name , User_Id,User_Name,Approval_Status) values (? ,?, ? , ?)', [$venuename, $userid, $username, $approval_status])) {
 
                 return redirect()->back()->with('message', 'Event creation is Successful.');
 
-            } else{
+            } else {
 
                 return redirect()->back()->with('message', 'Event creation is Successful.');
 
             }
         }
     }
+
+
+
+    public function hi(Request $request)
+    {
+        $image2 = $request->photoStore;
+
+        $imageData = base64_decode($image2);
+
+        $markedimage = Image::make($imageData);
+
+        $filename = uniqid() . '.png';
+
+        $markedimage->save(storage_path('/app/public/markedimages/' . $filename));
+
+        $imagepath1 = storage_path('/app/public/student_images/64eebf8028876.png');
+        $imagepath2 = storage_path('/app/public/markedimages/' . $filename);
+
+        $data1 = [
+            [
+                'name' => 'image1',
+                'contents' => file_get_contents($imagepath1),
+                'filename' => 'image1.png' // Adjust the filename as needed
+            ],
+            [
+                'name' => 'image2',
+                'contents' => file_get_contents($imagepath2),
+                'filename' => 'image2.png' // Adjust the filename as needed
+            ]
+        ];
+        $flaskServerUrl = 'http://localhost:5000/compare';
+        $client = new Client();
+        $response = $client->post($flaskServerUrl, [
+            'multipart' => $data1
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+
+        File::delete($imagepath2);
+        if (isset($data['result'])) {
+            if ($data['result'] === "NoFaces") {
+                return view('email.email')->with(["imgdata" => "No Faces Detected"]);
+            } else {
+                if ($data['result'] === "same") {
+                    return view('email.email')->with(["imgdata" => "success"]);
+                } else {
+                    return view('email.email')->with(["imgdata" => "failure"]);
+                }
+            }
+        } else {
+            return view('email.email')->with(["imgdata" => "Error"]);
+        }
+    }
+
+
 
 
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\venueapprovals;
 use Illuminate\Http\Request;
+use Google\Cloud\Vision\V1\ImageAnnotatorClient;
+
 
 class VenueapprovalsController extends Controller
 {
@@ -82,4 +84,7 @@ class VenueapprovalsController extends Controller
     {
         //
     }
+
+
+    public function 
 }

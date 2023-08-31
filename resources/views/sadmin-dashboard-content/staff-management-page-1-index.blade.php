@@ -49,7 +49,7 @@
             <h3 class="panel-title" style="text-align:center;">Register Students</h3>
             <br>
 
-            <form action="/insert-staff-data" method="POST">
+            <form action="/insert-staff-data" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-row">
 
@@ -88,12 +88,6 @@
                         <input type="text" class="form-control" id="phone_number" name="phone_number"
                             placeholder="Enter Phone Number" autocomplete="off" required>
                     </div>
-
-                    {{-- <div class="col-md-4 mb-3">
-              <label for="position">Position</label>
-              <input type="text" class="form-control" id="position" name="position" placeholder="Enter Position/Role" required>
-            </div> --}}
-
                 </div>
                 <input class="btn btn-lg btn-primary" value="Register" type="submit">
             </form>
@@ -133,7 +127,8 @@
                             {{-- <td>{{$data->position}}</td> --}}
                             <td><a class="btn btn-primary" href="/view-staff-management-edit/{{ $data->auto_id }}">Edit</a>
                                 <a class="btn btn-danger confirmation"
-                                    href="/delete-staff-data/{{ $data->auto_id }}">Delete</a></td>
+                                    href="/delete-staff-data/{{ $data->auto_id }}">Delete</a>
+                            </td>
                         </tr>
                     @endforeach
 

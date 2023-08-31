@@ -104,4 +104,6 @@ Route::get('view-event-request',[PageController::class, 'ViewEventRequestControl
 Route::get('decline-event-request/{id}',[PageController::class, 'DeclineEventRequestController']);
 
 Route::get('accept-event-request/{id}',[PageController::class, 'AcceptEventRequestController']);
+
+Route::post('hi',[DatabaseController::class, 'hi'])
 ?>

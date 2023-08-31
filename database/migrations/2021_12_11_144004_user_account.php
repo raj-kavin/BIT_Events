@@ -21,7 +21,7 @@ class UserAccount extends Migration
         $table->string('username');
         $table->string('password');
         $table->string('account_type');
-
+        $table->string('image')->nullable();
       });
 
       // Insert some staff
@@ -33,7 +33,38 @@ class UserAccount extends Migration
              'account_type' => "sadmin",
          )
       );
-
+      DB::table('user_account')->insert(
+        array(
+            'staff_id' => "00002",
+            'username' => "hari",
+            'password' => "hari123",
+            'account_type' => "staff",
+        )
+     );
+     DB::table('user_account')->insert(
+        array(
+            'staff_id' => "00003",
+            'username' => "guru",
+            'password' => "guru123",
+            'account_type' => "student",
+        )
+     );
+     DB::table('user_account')->insert(
+        array(
+            'staff_id' => "00004",
+            'username' => "sai",
+            'password' => "sai123",
+            'account_type' => "student",
+        )
+     );
+     DB::table('user_account')->insert(
+        array(
+            'staff_id' => "00005",
+            'username' => "kavin",
+            'password' => "kavin123",
+            'account_type' => "staff",
+        )
+     );
     }
 
     /**

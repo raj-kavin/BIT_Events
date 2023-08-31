@@ -91,16 +91,50 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <button type="button" class="btn btn-warning text-white col-sm-2 col-form-label" id="accesscamera" data-toggle="modal" data-target="#photoModal">
+                        Upload Photo
+                    </button>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="photoStore" name="photoStore" autocomplete="off" required>
+                    </div>
+                </div>
 
+                {{-- <input type="text"  required> --}}
                 <div class="form-group row">
                     <label style="visibility:hidden;" for="button" class="col-sm-2 col-form-label">button</label>
                     <div class="col-sm-8">
                         <input class="btn btn-primary col-md-2 col-sm-12" value="Create" id="button" type="submit">
                     </div>
                 </div>
-
             </form>
 
+        </div>
+    </div>
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Capture Photo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div id="my_camera" class="d-block mx-auto rounded overflow-hidden"></div>
+                    </div>
+                    <div id="results" class="d-none"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning mx-auto text-white" id="takephoto">Capture
+                        Photo</button>
+                    <button type="button" class="btn btn-warning mx-auto text-white d-none"
+                        id="retakephoto">Retake</button>
+                    <button type="" class="btn btn-success mx-auto text-white d-none" id="uploadphoto"
+                        form="photoForm" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -129,7 +163,7 @@
                                 <td><a class="btn btn-primary" href="/view-edit-user-account/{{ $data->auto_id }}">Edit</a> <a
                                         class="btn btn-danger confirmation"
                                         href="/delete-user-account/{{ $data->auto_id }}">Delete</a></td>
-                            </tr>   
+                            </tr>
                     @endforeach
 
                 </tbody>

@@ -14,14 +14,17 @@ class Staff_import implements ToModel
     */
     public function model(array $row)
     {
-        return new staff_data([
+        if(array_filter($row)){
 
-            'staff_id'=> $row[0],
-            'firstname' => $row[1],
-            'lastname' => $row[2],
-            'dob' => $row[3],
-            'email' => $row[4],
-            'phone_number' => $row[5],
-        ]);
+            return new staff_data([
+                'staff_id'=>isset($row[0]) ? $row[0] : 'empty',
+                'firstname' => isset($row[1]) ? $row[1] : 'empty',
+                'lastname' => isset($row[2]) ? $row[2] : 'empty',
+                'dob' => isset($row[3]) ? $row[3] : 'empty',
+                'email' => isset($row[4]) ? $row[4] : 'empty',
+                'phone_number' => isset($row[5]) ? $row[5] : 'empty',
+            ]);
+        }
+
     }
 }

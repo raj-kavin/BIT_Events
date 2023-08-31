@@ -73,6 +73,7 @@ class PageController extends Controller
 
             $staff_data = DB::table('staff_data')->get(); // Get staff data.
             return view("sadmin-dashboard-content/staff-management-page-1-index")->with('staff_data', $staff_data);
+            
         } else {
 
             return Redirect::to("/");
