@@ -10,7 +10,10 @@
 
 Dear student,
 <br>
-        {{$data['body']}}
+        {{-- {{$data['body']}} --}}
+
+
+        <pre>{{json_encode($imgdata, JSON_PRETTY_PRINT)}}</pre>
 
 
 </body>

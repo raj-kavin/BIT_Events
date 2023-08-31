@@ -109,5 +109,4 @@ Route::get('decline-event-request/{id}',[PageController::class, 'DeclineEventReq
 
 Route::get('accept-event-request/{id}',[PageController::class, 'AcceptEventRequestController']);
 
-
 ?>

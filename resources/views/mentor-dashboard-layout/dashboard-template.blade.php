@@ -17,7 +17,10 @@
     <link
         href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <!-- Custom styles for this template-->
     <link href="{{ asset('dashboard-template') }}/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('dashboard-template') }}/css/app.css">
@@ -27,11 +30,12 @@
             font-family: 'Poppins';
         }
 
-        .side-nav{
-            margin-left:15% !important;
-            background-color:black;
+        .side-nav {
+            margin-left: 15% !important;
+            background-color: black;
             /* font-size: 152px */
         }
+<<<<<<< HEAD
         .side-nav-closed{
             margin-left:8%
         }
@@ -41,7 +45,12 @@
 
             /* Replace with your desired color */
         }
+=======
+>>>>>>> ad2109f590cdb91a59b0210fb3774f9105417342
 
+        .side-nav-closed {
+            margin-left: 8%
+        }
     </style>
 
 </head>
@@ -115,7 +124,7 @@
 
             @if (Session::get('Session_Type') == 'staff')
                 <li class="nav-item">
-                    <a class="nav-link" href="/view-events-approval/{{Session::get('Session_Id')}}">
+                    <a class="nav-link" href="/view-events-approval/{{ Session::get('Session_Id') }}">
                         <i class="fas fa-fw fa-database"></i>
                         <span>Events Approval</span></a>
                 </li>
@@ -245,19 +254,26 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('dashboard-template') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('dashboard-template') }}/js/demo/chart-pie-demo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <script src="{{ asset('dashboard-template') }}/sweetalert/sweetalert.min.js"></script>
+    <script src="{{ asset('dashboard-template') }}/webcamjs/webcam.min.js"></script>
+    <script src="{{ asset('dashboard-template') }}/main.js"></script>
     <script>
-        function callfun(){
+        function callfun() {
 
             const content = document.getElementById("content-wrapper");
             const classLists = content.classList;
-            if(classLists.contains("side-nav")){
+            if (classLists.contains("side-nav")) {
                 content.classList.remove("side-nav");
-            }
-            else{
+            } else {
                 content.classList.add("side-nav");
             }
         }
+
     </script>
+<<<<<<< HEAD
     <script>
         $(document).ready(function() {
 
@@ -266,6 +282,9 @@
             $('.nav-item a[href="' + path + '"]').parent().addClass('active');
         });
     </script>
+=======
+
+>>>>>>> ad2109f590cdb91a59b0210fb3774f9105417342
 </body>
 
 </html>

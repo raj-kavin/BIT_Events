@@ -26,8 +26,9 @@ class LoginController extends Controller
         $real_username      = "";
         $real_password      = "";
         $real_account_type  = "";
+        $real_image         = "";
 
-        $user = DB::select( DB::raw("SELECT staff_id,username, password,account_type FROM user_account WHERE username ='$user_entered_username'"));
+        $user = DB::select( DB::raw("SELECT staff_id,username, password,account_type,image FROM user_account WHERE username ='$user_entered_username'"));
 
         foreach($user as $u){
 
@@ -35,7 +36,7 @@ class LoginController extends Controller
            $real_username     =     $u->username;
            $real_password     =     $u->password;
            $real_account_type =     $u->account_type;
-
+           $real_image        =     $u->image;
        }
 
        if($real_username != "" && $real_password != "" && $real_account_type != ""){
@@ -81,7 +82,7 @@ class LoginController extends Controller
             Session::put('Session_Type', 'staff');
             Session::put('Session_Value', $real_username);
             Session::put('Session_Id', $real_staff_id);
-
+            Session::put('Session_image', $real_image);
 
 
             return Redirect::to("/view-home-page");
@@ -92,7 +93,8 @@ class LoginController extends Controller
             Session::put('Session_Type', 'student');
             Session::put('Session_Value', $real_username);
             Session::put('Session_Id', $real_staff_id);
-
+            Session::put('Session_image', $real_image);
+            
             return Redirect::to("/view-home-page");
 
           // }
