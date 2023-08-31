@@ -23,7 +23,7 @@
 <body>
     <div class="container-fluid ">
         <div class="container ">
-            <div class="row ">
+            <div class="row">
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)
                         <div id="errorBox" style="text-align:center;margin-top:20px;"

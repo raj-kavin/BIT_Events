@@ -24,7 +24,7 @@
     @endif
 
     {{-- <pre>{{ json_encode($Event_Data, JSON_PRETTY_PRINT) }}</pre> --}}
-    <table class="table table-bordered table-hover table-dark">
+    <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless table-hover table-dark">
         <thead>
             <tr>
                 <th scope="col">#</th>

@@ -21,13 +21,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('dashboard-template') }}/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('dashboard-template') }}/css/app.css">
 
     <style>
+
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            border-radius: 4px;
+        }
+
+        .panel-title {
+            font-family:'Iceland';
+            font-size: 35px;
+            color: black;
+            font-weight: bold
+        }
+
         * {
             font-family: 'Poppins';
+        }
+
+        .nav-item:hover {
+            background-color: #c54f4f;
+            border-radius: 25px;
+            /* Replace with your desired color */
+        }
+
+        .header:hover {
+            background: none;
+        }
+
+        .nav-item.active {
+            background-color: #c54f4f;
+            border-radius: 25px;
+            /* Replace with your desired color */
+        }
+
+        .card {
+            border-radius: 25px;
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
         }
 
         .side-nav {
@@ -35,21 +85,39 @@
             background-color: black;
             /* font-size: 152px */
         }
-<<<<<<< HEAD
-        .side-nav-closed{
-            margin-left:8%
-        }
-        .nav-item.active {
-            background-color:rgba(206, 204, 204, 0.566);
-            border-radius: 20px;
 
-            /* Replace with your desired color */
+        .nav {
+
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-bottom: 10px;
+            padding-left: 15px;
+            padding-right: 5px;
+            padding-top: 10px;
+            gap: 10px;
+            text-align: center;
+
+
+
         }
-=======
->>>>>>> ad2109f590cdb91a59b0210fb3774f9105417342
+
+        .nav:hover {
+            text-decoration: none;
+            color: white;
+        }
 
         .side-nav-closed {
             margin-left: 8%
+        }
+
+        .wholeNavbar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-left: 10px;
+            padding-right: 10px;
         }
     </style>
 
@@ -61,14 +129,14 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul style="z-index: 1000;"
+        <ul style=" background-color:#1c1940 ; z-index: 1000;"
             class="navbar-nav position-fixed z-index-2 sidebar sidebar-dark accordion bg-gradient-primary"
             id="accordionSidebar">
             {{-- bg-gradient-primary --}}
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-text mx-3">BIT Camps</div>
+                <div  style = "color:white" class="sidebar-brand-text mx-3">BIT Camps</div>
             </a>
 
             <!-- Divider -->
@@ -78,6 +146,7 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Charts -->
+            <div class="wholeNavbar">
             <li class="nav-item">
                 <a class="nav-link" href="/view-home-page">
                     <i class="fas fa-fw fa-home"></i>
@@ -126,7 +195,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/view-events-approval/{{ Session::get('Session_Id') }}">
                         <i class="fas fa-fw fa-database"></i>
-                        <span>Events Approval</span></a>
+                        <span>Create Events</span></a>
                 </li>
             @endif
 
@@ -135,7 +204,7 @@
                     <i class="fas fa-fw fa-power-off"></i>
                     <span>Logout</span></a>
             </li>
-
+        </div>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -181,7 +250,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid" style="min-height: 580px">
 
 
                     @yield('dashboard-admin-content')
@@ -273,18 +342,16 @@
         }
 
     </script>
-<<<<<<< HEAD
     <script>
         $(document).ready(function() {
 
             var path = window.location.pathname;
 
             $('.nav-item a[href="' + path + '"]').parent().addClass('active');
+
         });
     </script>
-=======
 
->>>>>>> ad2109f590cdb91a59b0210fb3774f9105417342
 </body>
 
 </html>
