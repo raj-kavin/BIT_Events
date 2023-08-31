@@ -1,4 +1,4 @@
-@extends('mentor-dashboard-layout.dashboard-template')
+@extends('sadmin-dashboard-layout.dashboard-template')
 
 @section('dashboard-admin-content')
 

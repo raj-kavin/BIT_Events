@@ -51,7 +51,7 @@
 
 <div class="card">
     <div class="card-body">
-      <h3 class="panel-title" style="text-align:center;">Change Username</h3>
+      <h3 class="panel-title" style="text-align:center;color:black; font-weight:bold;">Change Username</h3>
       <br>
 
       <form action="/change-username" method="POST">
@@ -93,7 +93,7 @@
 
 <div class="card">
     <div class="card-body">
-      <h3 class="panel-title" style="text-align:center;">Change Password</h3>
+      <h3 class="panel-title" style="text-align:center;color:black; font-weight:bold;">Change Password</h3>
       <br>
 
       <form action="/change-password" method="POST">

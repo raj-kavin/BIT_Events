@@ -7,8 +7,8 @@
 <br>
 <center>
     <div style="height:450px ; width:670px ; overflow-y:scroll;">
-        <table class="table table-bordered   table-hover table-dark">
-            <thead>
+        <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless  table-hover table-dark">
+            <thead style="border-bottom:2px solid white">
                 <center>
                     <tr>
                         <th scope="col">#</th>

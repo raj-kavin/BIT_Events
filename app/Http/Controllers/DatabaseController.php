@@ -120,13 +120,13 @@ class DatabaseController extends Controller
 
         $session_type = Session::get('Session_Type');
 
-        if ($session_type == "Admin") {
+        if ($session_type == "sadmin") {
 
-            $admin_data = DB::table('user_account')->where("account_type", "admin")->get(); // Get staff data.
+            $admin_data = DB::table('user_account')->where("account_type", "sadmin")->get(); // Get staff data.
 
             if ($request->password == $admin_data[0]->password) {
 
-                if (DB::table('user_account')->where('account_type', 'admin')->update(['username' => $request->username])) {
+                if (DB::table('user_account')->where('account_type', 'sadmin')->update(['username' => $request->username])) {
 
                     return redirect()->back()->with('message', 'Username has been updated successfully.');
                 } else {
@@ -148,15 +148,15 @@ class DatabaseController extends Controller
 
         $session_type = Session::get('Session_Type');
 
-        if ($session_type == "Admin") {
+        if ($session_type == "sadmin") {
 
-            $admin_data = DB::table('user_account')->where("account_type", "admin")->get(); // Get staff data.
+            $admin_data = DB::table('user_account')->where("account_type", "sadmin")->get(); // Get staff data.
 
             if ($request->current_password == $admin_data[0]->password) {
 
                 if ($request->new_password == $request->confirm_password) {
 
-                    if (DB::table('user_account')->where('account_type', 'admin')->update(['password' => $request->new_password])) {
+                    if (DB::table('user_account')->where('account_type', 'sadmin')->update(['password' => $request->new_password])) {
 
                         return redirect()->back()->with('message', 'Password has been updated successfully.');
                     } else {
@@ -274,9 +274,10 @@ class DatabaseController extends Controller
 
         $session_type = Session::get('Session_Type');
 
-        if ($session_type == "Admin") {
+        if ($session_type == "sadmin") {
 
-            $this->validate($request, [
+
+            $validatedata = $request->validate([
                 'username' => 'required',
                 'password' => 'required',
             ]);

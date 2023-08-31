@@ -1,57 +1,67 @@
 @extends('sadmin-dashboard-layout.dashboard-template')
 
 @section('dashboard-admin-content')
+    @if (session()->has('message'))
+        <div id="successBox" style="text-align:center;margin-top:20px;"
+            class="alert alert-success col-md-12 alert-dismissible fade show" role="alert">
+            <strong> {{ session()->get('message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
-@if (session()->has('message'))
-<div id="successBox" style="text-align:center;margin-top:20px;"
-    class="alert alert-success col-md-12 alert-dismissible fade show" role="alert">
-    <strong> {{ session()->get('message') }}</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+        <script>
+            setTimeout(
+                function() {
+                    $("#successBox").delay(3000).fadeOut("slow");
 
-<script>
-    setTimeout(
-        function() {
-            $("#successBox").delay(3000).fadeOut("slow");
+                }, 1000);
+        </script>
+    @endif
 
-        }, 1000);
-</script>
-@endif
+    <div class="card">
+        <br>
+        <h3 class="panel-title" style="color:black; font-weight:bold; text-align:center;">Event Requests</h3>
+        <div class="card-body" style="display: flex; flex-wrap:wrap;justify-content:center;gap:10px;">
 
-<div class="card">
-    <div class="card-body">
-      <h3 class="panel-title" style="text-align:center;">Event Requests</h3>
-      <br>
-
-
-
-      @foreach ($Event_request as $key => $data)
-
-          <div class="card text-white bg-dark mb-3">
-            <div class="card-header bg-dark ">
-                User_Name : <strong>{{ $data->User_Id }}({{ $data->User_Name }})</strong><br>Event Name : <strong>{{ $data->event_name }}</strong><br>Event Venue : <strong>{{ $data->event_venue }}</strong>
-                <br>From Date : <strong>{{ $data->F_date}}</strong> <br>To Date : <strong>{{ $data->T_date}}</strong>
-
-
-            </div>
-            <div class="card-body">
-
-              <a style="margin-left:10px;" class="btn btn-danger  float-right " href="decline-event-request/{{$data->id}}">Decline</a>
-              <a class="btn btn-primary float-right" href="accept-event-request/{{$data->id}}">Accept</a>
-
-            </div>
-          </div>
-
-      @endforeach
+            <br>
 
 
 
+            @foreach ($Event_request as $key => $data)
+                <div style="background-color: #1c1940; color:white; border-radius:25px;width:550px; "
+                    class="card text-white mb-3">
+                    <div style="background-color: #1c1940; color:white; border-radius:25px" class="card-body ">
+                        <div style="display: flex;flex-direction:row;justify-content:space-between;align-items:center">
+                            <div class="float-left text-lg"> <strong>Req By : {{ $data->User_Name }}</strong><br></div>
+                            <div><a style="margin-left:10px;" class="btn btn-danger  float-right "
+                                    href="decline-event-request/{{ $data->id }}">Decline</a>
+                                <a style="background-color:blue" class="btn btn-primary float-right"
+                                    href="accept-event-request/{{ $data->id }}">Accept</a>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div style="display: flex;justify-content:space-between;">
+                            <div>Event Name : <strong>{{ $data->event_name }}</strong><br>Event Venue :
+                                <strong>{{ $data->event_venue }}</strong></div>
+
+                            <div style="text-align: end">From Date : <strong>{{ $data->F_date }}</strong> <br>To Date :
+                                <strong>{{ $data->T_date }}</strong></div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            @endforeach
+
+
+
+        </div>
     </div>
-</div>
 
-{{-- <center>
+    {{-- <center>
     <h3>Event Request</h3>
 </center>
 <br>

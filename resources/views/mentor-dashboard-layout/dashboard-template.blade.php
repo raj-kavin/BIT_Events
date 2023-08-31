@@ -35,6 +35,12 @@
         .side-nav-closed{
             margin-left:8%
         }
+        .nav-item.active {
+            background-color:rgba(206, 204, 204, 0.566);
+            border-radius: 20px;
+
+            /* Replace with your desired color */
+        }
 
     </style>
 
@@ -46,7 +52,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul style="z-index: 1000"
+        <ul style="z-index: 1000;"
             class="navbar-nav position-fixed z-index-2 sidebar sidebar-dark accordion bg-gradient-primary"
             id="accordionSidebar">
             {{-- bg-gradient-primary --}}
@@ -251,6 +257,14 @@
                 content.classList.add("side-nav");
             }
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            var path = window.location.pathname;
+
+            $('.nav-item a[href="' + path + '"]').parent().addClass('active');
+        });
     </script>
 </body>
 

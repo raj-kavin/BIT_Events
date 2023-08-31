@@ -43,7 +43,7 @@
 
     <div class="card">
         <div class="card-body">
-            <h3 class="panel-title" style="text-align:center;">Create User Accounts</h3>
+            <h3 class="panel-title" style="text-align:center;color:black; font-weight:bold;">Create User Accounts</h3>
             <br>
 
             <form action="/insert-user-accounts" method="POST">
@@ -95,7 +95,7 @@
                 <div class="form-group row">
                     <label style="visibility:hidden;" for="button" class="col-sm-2 col-form-label">button</label>
                     <div class="col-sm-8">
-                        <input class="btn btn-primary col-md-2 col-sm-12" value="Create" id="button" type="submit">
+                        <input style = "background-color:#c54f4f;" class="btn btn-primary col-md-2 col-sm-12" value="Create" id="button" type="submit">
                     </div>
                 </div>
 
@@ -109,8 +109,8 @@
     <div class="card">
         <div class="card-body" style="overflow: scroll">
 
-            <table class="table table-bordered table-hover table-dark">
-                <thead>
+            <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless table-hover table-dark">
+                <thead style="border-bottom:2px solid white">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Roll No.</th>
@@ -126,10 +126,10 @@
                             <td>{{ $data->staff_id }}</td>
                             <td>{{ $data->username }}</td>
                             <td>{{ $data->password }}</td>
-                                <td><a class="btn btn-primary" href="/view-edit-user-account/{{ $data->auto_id }}">Edit</a> <a
+                                <td><a style = "background-color:blue;" class="btn btn-primary" href="/view-edit-user-account/{{ $data->auto_id }}">Edit</a> <a
                                         class="btn btn-danger confirmation"
                                         href="/delete-user-account/{{ $data->auto_id }}">Delete</a></td>
-                            </tr>   
+                            </tr>
                     @endforeach
 
                 </tbody>
@@ -142,13 +142,4 @@
 
 @endsection
 
-<script>
-    window.onload = function() {
-        $(".nav-item:eq(3)").addClass("active");
 
-        $('.confirmation').on('click', function() {
-            return confirm('Are you sure to delete?');
-        });
-
-    }
-</script>

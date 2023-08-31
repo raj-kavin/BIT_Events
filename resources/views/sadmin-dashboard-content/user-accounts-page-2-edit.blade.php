@@ -49,7 +49,7 @@
 
 <div class="card">
     <div class="card-body">
-      <h3 class="panel-title" style="text-align:center;">Change Username</h3>
+      <h3 class="panel-title" style="text-align:center;color:black; font-weight:bold;">Change Username</h3>
       <br>
 
       <form action="/edit-user-account" method="POST">
@@ -75,7 +75,7 @@
         <div class="form-group row">
           <label style="visibility:hidden;" for="button" class="col-sm-2 col-form-label">button</label>
           <div class="col-sm-8">
-            <input class="btn btn-primary col-md-2 col-sm-12 float-right" value="Update" id="button" type="submit">
+            <input style = "background-color:#c54f4f;" class="btn btn-primary col-md-2 col-sm-12 float-right" value="Update" id="button" type="submit">
           </div>
         </div>
 
@@ -86,9 +86,3 @@
 
 @endsection
 
-<script>
-
-    window.onload=function(){
-      $(".nav-item:eq(3)").addClass("active");
-    }
-</script>

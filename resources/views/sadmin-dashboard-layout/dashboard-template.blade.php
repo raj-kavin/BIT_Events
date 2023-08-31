@@ -12,44 +12,117 @@
     <title>Admin Login</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{asset('dashboard-template')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('dashboard-template') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+        type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{asset('dashboard-template')}}/css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('dashboard-template')}}/css/app.css">
+    <link href="{{ asset('dashboard-template') }}/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('dashboard-template') }}/css/app.css">
 
 
     <style>
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+            border-radius: 4px;
+        }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  border-radius: 4px;
-}
-
-
-
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
 
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-  border-radius: 4px;
-}
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            border-radius: 4px;
+        }
+
+        .panel-title {
+            font-family:'Iceland';
+            font-size: 35px;
+        }
+
+        * {
+            font-family: 'Poppins';
+        }
+
+        .nav-item:hover {
+            background-color: #c54f4f;
+            border-radius: 25px;
+            /* Replace with your desired color */
+        }
+
+        .header:hover {
+            background: none;
+        }
+
+        .nav-item.active {
+            background-color: #c54f4f;
+            border-radius: 25px;
+            /* Replace with your desired color */
+        }
+
+        .card {
+            border-radius: 25px;
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        }
+
+        .side-nav {
+            margin-left: 15% !important;
+            background-color: black;
+            /* font-size: 152px */
+        }
+
+        .nav {
+
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-bottom: 10px;
+            padding-left: 15px;
+            padding-right: 5px;
+            padding-top: 10px;
+            gap: 10px;
+            text-align: center;
 
 
 
-*{
-    font-family: 'Poppins';
-}
+        }
 
+        .nav:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        .side-nav-closed {
+            margin-left: 8%
+        }
+
+        .wholeNavbar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .file:hover {
+            background-color: blue;
+            border: 1px solid blue;
+        }
+
+        .file {
+            border: 1px solid blue;
+            color: blue;
+        }
     </style>
 
 </head>
@@ -60,7 +133,8 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav  sidebar sidebar-dark accordion bg-gradient-primary" id="accordionSidebar">
+        <ul style="background-color:#1c1940 ; z-index:1000"
+            class="navbar-nav position-fixed z-index-2    sidebar sidebar-dark accordion bg-gradient-primary">
             {{-- bg-gradient-primary --}}
 
             <!-- Sidebar - Brand -->
@@ -75,54 +149,50 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Charts -->
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="/view-home-page">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>Home</span></a>
-            </li> --}}
+            <div class="wholeNavbar">
+                <li class="nav-item ">
+                    <a class="nav" href="/view-staff-management-index">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Student List</span></a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/view-staff-management-index">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Student List</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav" href="/view-attendance-log">
+                        <i class="fas fa-fw fa-database"></i>
+                        <span>Attendance Log</span></a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/view-attendance-log">
-                    <i class="fas fa-fw fa-database"></i>
-                    <span>Attendance Log</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav" href="/view-user-accounts-index">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Accounts Manage</span></a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/view-user-accounts-index">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Accounts Manage</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav" href="/view-event-request">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Events Request</span></a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/view-event-request">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Events Request</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav" href="/view-settings-index">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Settings</span></a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/view-settings-index">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Settings</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/handle-logout">
-                    <i class="fas fa-fw fa-power-off"></i>
-                    <span>Logout</span></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav" href="/handle-logout">
+                        <i class="fas fa-fw fa-power-off"></i>
+                        <span>Logout</span></a>
+                </li>
+            </div>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                <button class="rounded-circle border-0" id="sidebarToggle" onclick="callfun()"></button>
             </div>
 
             <!-- Sidebar Message -->
@@ -132,13 +202,15 @@
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" style="background: #ffffff;"
+            class="d-flex flex-column z-index-0 side-nav side-nav-closed">
 
             <!-- Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav style="box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;"
+                    class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -147,12 +219,13 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
+                        <li class="nav-item header dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-3 d-none d-lg-inline" style="font-size: 18px; font-weight: bold;">Super Admin</span>
+                                <span class="mr-3 d-none d-lg-inline panel-title"
+                                    style="font-size: 25px;color:black; font-weight: bold;">Super Admin</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{asset('dashboard-template')}}/img/undraw_profile.svg">
+                                    src="{{ asset('dashboard-template') }}/img/undraw_profile.svg">
                             </a>
                         </li>
                     </ul>
@@ -161,10 +234,10 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid " style="min-height: 590px">
 
 
-                   @yield('dashboard-admin-content')
+                    @yield('dashboard-admin-content')
 
 
                 </div>
@@ -174,15 +247,20 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer">
-                <div class="container my-auto">
+
+            <footer class="sticky-footer"
+                style="height:30px;box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;">
+                <div class="container my-auto ">
                     <div class="copyright text-center my-auto">
                         <span>
-                            &copy; Copyright <b><i>Hypertext_Assasins</i></b> | All rights reserved | Co-created by <a style="color:#56509f; font-weight:bold;" href="https://www.bitsathy.ac.in/" target="_blank">BIT Team</a>
+                            &copy; Copyright <b><i>Hypertext_Assasins</i></b> | All rights reserved | Co-created by
+                            <a style="color:#56509f; font-weight:bold;" href="https://www.bitsathy.ac.in/"
+                                target="_blank">BIT Team</a>
                         </span>
                     </div>
                 </div>
             </footer>
+
             <!-- End of Footer -->
 
         </div>
@@ -217,21 +295,40 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{asset('dashboard-template')}}/vendor/jquery/jquery.min.js"></script>
-    <script src="{{asset('dashboard-template')}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('dashboard-template') }}/vendor/jquery/jquery.min.js"></script>
+    <script src="{{ asset('dashboard-template') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{asset('dashboard-template')}}/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('dashboard-template') }}/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('dashboard-template')}}/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{asset('dashboard-template')}}/vendor/chart.js/Chart.min.js"></script>
+    <script src="{{ asset('dashboard-template') }}/js/sb-admin-2.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{asset('dashboard-template')}}/js/demo/chart-area-demo.js"></script>
-    <script src="{{asset('dashboard-template')}}/js/demo/chart-pie-demo.js"></script>
+    <script src="{{ asset('dashboard-template') }}/js/demo/chart-area-demo.js"></script>
+    <script src="{{ asset('dashboard-template') }}/js/demo/chart-pie-demo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            var path = window.location.pathname;
+
+            $('.nav-item a[href="' + path + '"]').parent().addClass('active');
+
+        });
+    </script>
+    <script>
+        function callfun() {
+
+            const content = document.getElementById("content-wrapper");
+            const classLists = content.classList;
+            if (classLists.contains("side-nav")) {
+                content.classList.remove("side-nav");
+            } else {
+                content.classList.add("side-nav");
+            }
+        }
+    </script>
 
 </body>
 

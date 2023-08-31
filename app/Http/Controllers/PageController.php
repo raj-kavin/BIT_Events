@@ -56,23 +56,11 @@ class PageController extends Controller
         $session_type = Session::get('Session_Type');
         $session_value = Session::get('Session_Value');
 
-        if ($session_type == "Admin") {
+        if ($session_type == "sadmin") {
 
             $staff_data = DB::table('staff_data')->get(); // Get staff data.
-            return view("admin-dashboard-content/staff-management-page-1-index")->with('staff_data', $staff_data); //Send staff data with it.
+            return view("sadmin-dashboard-content/staff-management-page-1-index")->with('staff_data', $staff_data); //Send staff data with it.
 
-        } else if ($session_type == "staff" || $session_type == "student") {
-
-            $staff_data = DB::table('staff_data')->get(); // Get staff data.
-            return view("mentor-dashboard-content/staff-management-page-1-index")->with('staff_data', $staff_data);
-        } else if ($session_type == "slincharge") {
-
-            $staff_data = DB::table('staff_data')->get(); // Get staff data.
-            return view("slincharge-dashboard-content/staff-management-page-1-index")->with('staff_data', $staff_data);
-        } else if ($session_type == "sadmin") {
-
-            $staff_data = DB::table('staff_data')->get(); // Get staff data.
-            return view("sadmin-dashboard-content/staff-management-page-1-index")->with('staff_data', $staff_data);
         } else {
 
             return Redirect::to("/");
@@ -88,7 +76,7 @@ class PageController extends Controller
         if ($session_type == "sadmin") {
 
             $staff_data = DB::table('staff_data')->where("auto_id", $auto_id)->get(); // Get staff data.
-            return view("admin-dashboard-content/staff-management-page-2-edit")->with('staff_data', $staff_data); //Send staff data with it.
+            return view("sadmin-dashboard-content/staff-management-page-2-edit")->with('staff_data', $staff_data); //Send staff data with it.
 
         } else {
 
@@ -152,10 +140,10 @@ class PageController extends Controller
         $session_type = Session::get('Session_Type');
         $session_value = Session::get('Session_Value');
 
-        if ($session_type == "Admin") {
+        if ($session_type == "sadmin") {
 
             $user_data = DB::table('user_account')->where(["auto_id" => $auto_id])->get();
-            return view("admin-dashboard-content/user-accounts-page-2-edit")->with(['user_data' => $user_data]); //Send staff data with it.
+            return view("sadmin-dashboard-content/user-accounts-page-2-edit")->with(['user_data' => $user_data]); //Send staff data with it.
 
 
 
@@ -522,4 +510,20 @@ class PageController extends Controller
             }
         }
     }
+
+    public function StorePhotoController(Request $request){
+
+        // $photoData = $request->photo_data;
+        // $session_id = Session::get('Session_Id');
+
+        // if ($photoData) {
+        //     $decodedImage = base64_decode($photoData);
+        //     $filename = 'captured_photo_' . $session_id . '.jpg';
+        //     Storage::disk('public')->put($filename, $decodedImage);
+            return redirect()->back()->with('message', 'Photo has been stored successfully');
+        }
+
+    //     return redirect()->back()->withErrors("Not Stored");
+    // }
 }
+

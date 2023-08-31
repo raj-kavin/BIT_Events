@@ -46,12 +46,12 @@
     <div class="card">
         <div class="card-body">
 
-            <h3 class="panel-title" style="text-align:center;">Register Students</h3>
+            <h3 class="panel-title" style="text-align:center; color:black; font-weight:bold;">Register Students</h3>
             <br>
 
             <form action="/insert-staff-data" method="POST">
                 @csrf
-                <div class="form-row">
+                <div style="color: black;" class="form-row">
 
                     <div class="col-md-4 mb-3">
                         <label for="staff_id">Roll No.</label>
@@ -95,7 +95,7 @@
             </div> --}}
 
                 </div>
-                <input class="btn btn-lg btn-primary" value="Register" type="submit">
+                <input style = "background-color:#c54f4f;" class="btn   btn-primary" value="Register" type="submit">
             </form>
 
         </div>
@@ -103,11 +103,11 @@
 
     <br>
 
-    <div class="card">
-        <div class="card-body" style="overflow: scroll">
+    <div style="margin-bottom: 20px;" class="card">
+        <div class="card-body" style="overflow:scroll">
 
-            <table class="table table-bordered table-hover table-dark">
-                <thead>
+            <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless table-hover table-dark">
+                <thead style="border-bottom:2px solid white">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Staff ID</th>
@@ -131,7 +131,7 @@
                             <td>{{ $data->email }}</td>
                             <td>{{ $data->phone_number }}</td>
                             {{-- <td>{{$data->position}}</td> --}}
-                            <td><a class="btn btn-primary" href="/view-staff-management-edit/{{ $data->auto_id }}">Edit</a>
+                            <td><a style = "background-color:blue;" class="btn btn-primary" href="/view-staff-management-edit/{{ $data->auto_id }}">Edit</a>
                                 <a class="btn btn-danger confirmation"
                                     href="/delete-staff-data/{{ $data->auto_id }}">Delete</a></td>
                         </tr>
@@ -139,11 +139,14 @@
 
                 </tbody>
             </table>
+
+
+
             <form action="/import-data" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group  col-sm-8">
-                    <input type="file" name="xlupload" class="col-sm-5">
-                    <button class="btn btn-outline-primary" type="submit">Upload</button>
+                    <input type="file" name="xlupload" class="col-sm-5 choose">
+                    <button class="btn btn-outline-primary file" type="submit">Upload</button>
                 </div>
             </form>
 
@@ -155,14 +158,3 @@
 
 
 @endsection
-
-<script>
-    window.onload = function() {
-        $(".nav-item:eq(1)").addClass("active");
-
-        $('.confirmation').on('click', function() {
-            return confirm('Are you sure to delete?');
-        });
-
-    }
-</script>

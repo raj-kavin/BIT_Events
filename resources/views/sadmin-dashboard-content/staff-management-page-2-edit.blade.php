@@ -93,7 +93,7 @@
 
           <input type="hidden" name="auto_id" value="{{$staff_data[0]->auto_id}}" />
 
-          <input class="btn btn-lg btn-primary float-right" value="Update" type="submit">
+          <input style = "background-color:#c54f4f;"  class="btn btn-primary float-right" value="Update" type="submit">
 
         </form>
 
@@ -101,10 +101,3 @@
 </div>
 
 @endsection
-
-<script>
-
-    window.onload=function(){
-      $(".nav-item:eq(0)").addClass("active");
-    }
-</script>

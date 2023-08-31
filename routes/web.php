@@ -87,6 +87,8 @@ Route::get('/view-my-leave-history-of-staff-account',[PageController::class, 'Vi
 
 Route::post('/filter-search-leave-history-of-staff-account',[PageController::class, 'FilterSearchLeaveHistoryPageOfStaffAccountController']);
 
+Route::post('/store-photo',[PageController::class, 'StorePhotoController']);
+
 Route::post('/import-data',[ImportExcelController::class, 'ImportUserData']);
 
 Route::get('/view-event-index',[PageController::class, 'ViewEventIndexController']);
@@ -99,9 +101,13 @@ Route::get('/view-attendance-log',[PageController::class, 'ViewAttendanceLogCont
 
 Route::get('/view-staff-attendances/{date_of_request}',[PageController::class, 'ViewStaffAttendancesController']);
 
+Route::get('/view-student-attendances/{date_of_request}',[PageController::class, 'ViewStudentAttendancesController']);
+
 Route::get('view-event-request',[PageController::class, 'ViewEventRequestController']);
 
 Route::get('decline-event-request/{id}',[PageController::class, 'DeclineEventRequestController']);
 
 Route::get('accept-event-request/{id}',[PageController::class, 'AcceptEventRequestController']);
+
+
 ?>
