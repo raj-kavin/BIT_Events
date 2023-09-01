@@ -75,6 +75,9 @@
         </div>
     </div>
     <br>
+
+
+    {{-- <pre>{{ json_encode($imgdata, JSON_PRETTY_PRINT) }}</pre> --}}
     <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless table-hover table-dark">
         <thead>
             <tr>
@@ -83,6 +86,7 @@
                 <th scope="col">From_Date</th>
                 <th scope="col">To_date</th>
                 <th scope="col">Venue</th>
+                <th scope="col">Register_Count</th>
                 <th scope="col">Students_Count</th>
             </tr>
         </thead>
@@ -95,10 +99,15 @@
                     <td>{{ $data->from_date }}</td>
                     <td>{{ $data->to_date }}</td>
                     <td>{{ $data->venue }}</td>
-                    @if ($data->count === null)
+                    @if ($data->registration_count === null)
                         <td>0</td>
                     @else
-                        <td>{{ $data->count }}</td>
+                        <td>{{ $data->registration_count }}      <a href="/view-register-students/{{$data->id}}" style="color:white;text-decoration:none;"><i class="fa-solid fa-eye"></i></a></td>
+                    @endif
+                    @if ($data->attendance_count === null)
+                        <td>0</td>
+                    @else
+                        <td>{{ $data->attendance_count }}   <a href="/view-event-attendances/{{$data->id}}" style="color:white;text-decoration:none;"><i class="fa-solid fa-eye"></i></a></td>
                     @endif
                 </tr>
             @endforeach

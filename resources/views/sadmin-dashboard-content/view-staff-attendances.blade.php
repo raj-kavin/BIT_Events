@@ -30,6 +30,9 @@
 
                 </tbody>
             </table>
+            <a href="/view-attendance-log"  class="btn btn-danger">Back</a>
         </div>
+
+        
     </center>
 @endsection

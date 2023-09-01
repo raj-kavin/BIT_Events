@@ -23,8 +23,8 @@
                 @foreach ($Student_Counts as $data)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td><a style="color: white;text-decoration:none;"
-                                href="/view-student-attendances/{{ $data->date_of_request }}">{{ $data->date_of_request }}<a>
+                        <td>{{ $data->date_of_request }}      <a style="color: white;text-decoration:none;"
+                                href="/view-student-attendances/{{ $data->date_of_request }}"><i class="fa-solid fa-eye"></i><a>
                         </td>
                         <td>{{ $data->student_count }}</td>
                     </tr>
@@ -46,8 +46,8 @@
                 @foreach ($Staff_Counts as $data)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td><a style="color: white;text-decoration:none;"
-                                href="/view-staff-attendances/{{ $data->date_of_request }}">{{ $data->date_of_request }}</a>
+                        <td>{{ $data->date_of_request }}            <a style="color: white;text-decoration:none;"
+                                href="/view-staff-attendances/{{ $data->date_of_request }}"><i class="fa-solid fa-eye"></i></a>
                         </td>
                         <td>{{ $data->staff_count }}</td>
                     </tr>
