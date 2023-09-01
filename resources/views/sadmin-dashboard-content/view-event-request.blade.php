@@ -29,7 +29,7 @@
 
 
             @foreach ($Event_request as $key => $data)
-                <div style="background-color: #1c1940; color:white; border-radius:25px;width:550px; "
+                <div style="background-color: #1c1940; color:white; border-radius:25px;width:500px; "
                     class="card text-white mb-3">
                     <div style="background-color: #1c1940; color:white; border-radius:25px" class="card-body ">
                         <div style="display: flex;flex-direction:row;justify-content:space-between;align-items:center">

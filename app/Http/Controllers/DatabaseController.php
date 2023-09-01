@@ -877,7 +877,7 @@ class DatabaseController extends Controller
             $approval_status = "[PENDING]";
 
 
-            if ($eventname != 'NILL' && DB::insert('INSERT INTO eventsapprovals ( event_name , F_date,T_date, event_venue ,User_Id , User_Name ,Approval_Status) values (?, ? , ? , ? , ? , ? , ?)', [$eventname, $fdate, $tdate, $venue, $userid, $username, $approval_status])) {
+            if (DB::insert('INSERT INTO eventsapprovals ( event_name , F_date,T_date, event_venue ,User_Id , User_Name ,Approval_Status) values (?, ? , ? , ? , ? , ? , ?)', [$eventname, $fdate, $tdate, $venue, $userid, $username, $approval_status])) {
 
                 if ($venuename != 'NILL') {
 
@@ -886,13 +886,9 @@ class DatabaseController extends Controller
 
                 return redirect()->back()->with('message', 'Event creation is Successful.');
 
-            } elseif ($venuename != 'NILL' && DB::insert('INSERT INTO venueapprovals ( venue_name , User_Id,User_Name,Approval_Status) values (? ,?, ? , ?)', [$venuename, $userid, $username, $approval_status])) {
+            }else {
 
-                return redirect()->back()->with('message', 'Event creation is Successful.');
-
-            } else {
-
-                return redirect()->back()->with('message', 'Event creation is Successful.');
+                return redirect()->back()->withErrors("Something went wrong");
 
             }
         }

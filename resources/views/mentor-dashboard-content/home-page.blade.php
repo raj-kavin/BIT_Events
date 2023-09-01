@@ -50,8 +50,8 @@
             {{-- <form action="/insert-leave-data-of-staff-account" method="POST" enctype=”multipart/form-data> --}}
             @csrf
             <center>
-                <button class="btn btn-warning text-white" id="accesscamera" data-toggle="modal" data-target="#photoModal">
-                    Capture Photo
+                <button style="background-color:#c54f4f" class="btn btn-warning text-white" id="accesscamera" data-toggle="modal" data-target="#photoModal">
+                    Mark Attendance
                 </button>
             </center>
         </div>
@@ -60,7 +60,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Capture Photo</h5>
+                        <h5  class="modal-title" id="exampleModalLabel">Capture Photo</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -76,15 +76,48 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning mx-auto text-white" id="takephoto">Capture
+                        <button style="background-color:#c54f4f" type="button" class="btn btn-warning mx-auto text-white" id="takephoto">Capture
                             Photo</button>
-                        <button type="button" class="btn btn-warning mx-auto text-white d-none"
+                        <button style="background-color:#c54f4f" type="button" class="btn btn-warning mx-auto text-white d-none"
                             id="retakephoto">Retake</button>
-                        <button type="submit" class="btn btn-primary mx-auto text-white d-none" id="uploadphoto"
-                            form="photoForm">Upload</button>
+                        <button style="background-color:blue"type="submit" class="btn btn-primary mx-auto text-white d-none" id="uploadphoto"
+                            form="photoForm">Mark</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <br><br>
+    <div class="card">
+        <div class="card-body" style="overflow: scroll">
+            <h3 class="panel-title" style="text-align:center;">Attendance Details</h3>
+            <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless table-hover table-dark">
+                <thead style="border-bottom:2px solid white">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($data as $key => $datas)
+                      <tr>
+                          <th scope="row">{{ $key + 1 }}</th>
+                          <td>{{$datas->date_of_request}}</td>
+                          <td>{{$datas->request_time}}</td>
+                      </tr>
+
+                  @endforeach
+
+                </tbody>
+            </table>
+
+        </div>
+  </div>
+
+
+
 
     @endsection

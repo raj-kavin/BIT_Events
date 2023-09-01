@@ -102,7 +102,7 @@
 
             <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless table-hover table-dark">
                 <thead style="border-bottom:2px solid white">
-                    <tr>
+                    <tr style="white-space: nowrap">
                         <th scope="col">#</th>
                         <th scope="col">Staff ID</th>
                         <th scope="col">First Name</th>
@@ -116,7 +116,7 @@
                 </thead>
                 <tbody>
                     @foreach ($staff_data as $key => $data)
-                        <tr>
+                        <tr style="white-space: nowrap">
                             <th scope="row">{{ $key + 1 }}</th>
                             <td>{{ $data->staff_id }}</td>
                             <td>{{ $data->firstname }}</td>

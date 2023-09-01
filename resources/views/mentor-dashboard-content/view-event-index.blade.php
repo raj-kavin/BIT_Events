@@ -67,7 +67,7 @@
                 <div class="form-group row">
                     <label style="visibility:hidden;" for="button" class="col-sm-2 col-form-label">button</label>
                     <div class="col-sm-8">
-                        <input class="btn btn-primary col-md-2 col-sm-12" value="Submit" id="button" type="submit">
+                        <input style="background-color:#c54f4f" class="btn btn-primary col-md-2 col-sm-12" value="Submit" id="button" type="submit">
                     </div>
                 </div>
             </form>
@@ -75,8 +75,8 @@
         </div>
     </div>
     <br>
-    <table class="table table-bordered  table-hover table-dark">
-        <thead>
+    <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless table-hover table-dark">
+        <thead style="border-bottom:2px solid white">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Event_Name</th>

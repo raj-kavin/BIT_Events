@@ -17,9 +17,9 @@
     <link
         href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('dashboard-template') }}/css/sb-admin-2.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
         }
 
         .panel-title {
-            font-family:'Iceland';
+            font-family: 'Iceland';
             font-size: 35px;
         }
 
@@ -305,10 +305,21 @@
     <script src="{{ asset('dashboard-template') }}/js/sb-admin-2.min.js"></script>
 
     <!-- Page level custom scripts -->
-<<<<<<< HEAD
     <script src="{{ asset('dashboard-template') }}/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('dashboard-template') }}/js/demo/chart-pie-demo.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('dashboard-template') }}/sweetalert/sweetalert.min.js"></script>
+    <script src="{{ asset('dashboard-template') }}/webcamjs/webcam.min.js"></script>
+    <script src="{{ asset('dashboard-template') }}/main.js"></script>
     <script>
         $(document).ready(function() {
 
@@ -331,16 +342,6 @@
         }
     </script>
 
-=======
-    <script src="{{asset('dashboard-template')}}/js/demo/chart-area-demo.js"></script>
-    <script src="{{asset('dashboard-template')}}/js/demo/chart-pie-demo.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    <script src="{{ asset('dashboard-template') }}/sweetalert/sweetalert.min.js"></script>
-    <script src="{{ asset('dashboard-template') }}/webcamjs/webcam.min.js"></script>
-    <script src="{{ asset('dashboard-template') }}/main.js"></script>
->>>>>>> ad2109f590cdb91a59b0210fb3774f9105417342
 </body>
 
 </html>

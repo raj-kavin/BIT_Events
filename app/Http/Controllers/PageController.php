@@ -23,28 +23,14 @@ class PageController extends Controller
 
         $session_type = Session::get('Session_Type');
         $session_value = Session::get('Session_Value');
+        $session_id = Session::get('Session_Id');
 
-        if ($session_type == "staff") {
+        if ($session_type == "staff" || $session_type == "student") {
 
-            //  $pending_data = DB::select("SELECT leave_data.*, staff_data.firstname, staff_data.lastname FROM leave_data, staff_data WHERE staff_data.staff_id = leave_data.staff_id AND leave_data.approval_status = '[SLHEAD APPROVED]' ORDER BY leave_data.date_of_request ASC"); // SQL-CODE
+             $pending_data = DB::select("SELECT date_of_request,request_time FROM leave_data WHERE staff_id = ? " , [$session_value]); // SQL-CODE
 
-            return view("mentor-dashboard-content/home-page");
-        } else if ($session_type == "student") {
-
-            // $pending_data = DB::select("SELECT leave_data.*, staff_data.firstname, staff_data.lastname FROM leave_data, staff_data WHERE staff_data.staff_id = leave_data.staff_id AND leave_data.approval_status = '[PENDING]' ORDER BY leave_data.date_of_request ASC");
-
-            return view("mentor-dashboard-content/home-page");
-        } else if ($session_type == "Staff") {
-        } else if ($session_type == "sadmin") {
-            $pending_data = DB::select("SELECT leave_data.*, staff_data.firstname, staff_data.lastname FROM leave_data, staff_data WHERE staff_data.staff_id = leave_data.staff_id AND leave_data.approval_status = '[PENDING]' ORDER BY leave_data.date_of_request ASC");
-            return view("sadmin-dashboard-content/home-page")->with("pending_data", $pending_data);
-        } else if ($session_type == "slincharge") {
-            $pending_data = DB::select("SELECT leave_data.*, staff_data.firstname, staff_data.lastname FROM leave_data, staff_data WHERE staff_data.staff_id = leave_data.staff_id AND leave_data.approval_status = '[MENTOR APPROVED]' ORDER BY leave_data.date_of_request ASC");
-            return view("slincharge-dashboard-content/home-page")->with("pending_data", $pending_data);
-        } else if ($session_type == "slhead") {
-            $pending_data = DB::select("SELECT leave_data.*, staff_data.firstname, staff_data.lastname FROM leave_data, staff_data WHERE staff_data.staff_id = leave_data.staff_id AND leave_data.approval_status = '[SLINC APPROVED]' ORDER BY leave_data.date_of_request ASC");
-            return view("slhead-dashboard-content/home-page")->with("pending_data", $pending_data);
-        } else {
+            return view("mentor-dashboard-content/home-page")->with(['data' => $pending_data]);
+        }else {
 
             return Redirect::to("/");
         }

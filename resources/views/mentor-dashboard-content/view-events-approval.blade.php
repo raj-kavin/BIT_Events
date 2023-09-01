@@ -22,14 +22,14 @@
 
     <form action="/eventapproval" method="POST">
         @csrf
-        <div class="d-flex justify-content-between align-items-center">
-            <h3 class="panel-title" style="text-align:start;">Events</h3>
+        <div class="d-flex justify-content-center align-items-center">
+            <h3 class="panel-title" style="text-align:start;">Events Creation</h3>
         </div>
 
 
         <div class="card" id="firstForm">
             <div class="card-body">
-
+                <h3 class="panel-title" style="text-align:start;">Events</h3>
                 <br>
                 <div class="form-group row">
                     <label for="eventname" class="col-sm-2 col-form-label">Event Name</label>
@@ -69,21 +69,21 @@
         <br>
 
 
-        <div class="d-flex justify-content-between align-items-center">
-            <h3 class="panel-title" style="text-align:start;">Venues</h3>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="secondFormCheckBox">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Required
-                </label>
-            </div>
-        </div>
 
-        <div class="card" id="secondForm">
+
+        <div class="card" >
             <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="panel-title" style="text-align:start;">Venues</h3>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="secondFormCheckBox">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Required
+                        </label>
+                    </div>
+                </div>
 
-
-                <div class="form-group row">
+                <div class="form-group row" id="secondForm">
                     <label for="eventname" class="col-sm-2 col-form-label">Venue Name</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="venuename" name="venuename" placeholder="venue name"
@@ -96,21 +96,21 @@
 
         </div>
         <br>
-        <div class="d-flex justify-content-between align-items-center">
-            <h3 class="panel-title" style="text-align:start;">Guest</h3>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="thirdFormCheckBox">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Required
-                </label>
-            </div>
-        </div>
 
-        <div class="card" id="thirdForm">
+
+        <div class="card" ">
             <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="panel-title" style="text-align:start;">Guest</h3>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="thirdFormCheckBox">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Required
+                        </label>
+                    </div>
+                </div>
 
-
-                <div class="form-group row">
+                <div class="form-group row" id="thirdForm">
                     <label for="guest" class="col-sm-2 col-form-label">Guest</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="guest" name="guest" placeholder="guest"
@@ -127,7 +127,7 @@
             <div class="form-group row mt-5">
                 <label style="visibility:hidden;" for="button" class="col-sm-2 col-form-label">button</label>
                 <div class="col-sm-8">
-                    <input class="btn btn-primary col-md-2 col-sm-12" value="Submit" id="button" type="submit">
+                    <input style="background-color:#c54f4f" class="btn btn-primary col-md-2 col-sm-12" value="Submit" id="button" type="submit">
                 </div>
             </div>
 
@@ -138,15 +138,15 @@
 
     <br>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large
-        modal</button>
+    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large
+        modal</button> --}}
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <table class="table table-bordered  table-hover table-dark">
-                    <thead>
+                <table style="background-color: #1c1940; color:white; border-radius:25px;" class="table table-borderless  table-hover table-dark">
+                    <thead style="border-bottom:2px solid white">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Event_Name</th>

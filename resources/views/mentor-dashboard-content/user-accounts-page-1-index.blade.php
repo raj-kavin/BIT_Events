@@ -102,7 +102,7 @@
       <div class="card-body" style="overflow: scroll">
 
           <table class="table table-bordered table-hover table-dark">
-              <thead>
+              <thead style="border-bottom:2px solid white">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Roll No.</th>
