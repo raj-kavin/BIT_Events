@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\venueapprovals;
+use App\Models\registerevent;
 use Illuminate\Http\Request;
-use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
-
-class VenueapprovalsController extends Controller
+class RegistereventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,10 +41,10 @@ class VenueapprovalsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\venueapprovals  $venueapprovals
+     * @param  \App\Models\registerevent  $registerevent
      * @return \Illuminate\Http\Response
      */
-    public function show(venueapprovals $venueapprovals)
+    public function show(registerevent $registerevent)
     {
         //
     }
@@ -54,10 +52,10 @@ class VenueapprovalsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\venueapprovals  $venueapprovals
+     * @param  \App\Models\registerevent  $registerevent
      * @return \Illuminate\Http\Response
      */
-    public function edit(venueapprovals $venueapprovals)
+    public function edit(registerevent $registerevent)
     {
         //
     }
@@ -66,10 +64,10 @@ class VenueapprovalsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\venueapprovals  $venueapprovals
+     * @param  \App\Models\registerevent  $registerevent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, venueapprovals $venueapprovals)
+    public function update(Request $request, registerevent $registerevent)
     {
         //
     }
@@ -77,13 +75,11 @@ class VenueapprovalsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\venueapprovals  $venueapprovals
+     * @param  \App\Models\registerevent  $registerevent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(venueapprovals $venueapprovals)
+    public function destroy(registerevent $registerevent)
     {
         //
     }
-
-
 }

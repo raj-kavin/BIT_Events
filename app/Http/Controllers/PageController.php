@@ -25,12 +25,14 @@ class PageController extends Controller
         $session_value = Session::get('Session_Value');
         $session_id = Session::get('Session_Id');
 
+
         if ($session_type == "staff" || $session_type == "student") {
+
 
              $pending_data = DB::select("SELECT date_of_request,request_time FROM leave_data WHERE staff_id = ? " , [$session_value]); // SQL-CODE
 
             return view("mentor-dashboard-content/home-page")->with(['data' => $pending_data]);
-        }else {
+        } else {
 
             return Redirect::to("/");
         }
@@ -383,18 +385,24 @@ class PageController extends Controller
         // $EventCounts = DB::select('SELECT COUNT(id) as count, event_id from eventsattendences GROUP BY  event_id  ' );
         // $session_id = Session::get('Session_Id');
         $EventData = DB::table('events')
-            ->select('events.*', 'attendances.count')
+            ->select('events.*', 'attendances.count as attendance_count', 'registrations.count as registration_count')
             ->leftJoinSub(function ($query) {
                 $query->select('event_id', DB::raw('COUNT(*) as count'))
                     ->from('eventsattendences')
                     ->groupBy('event_id');
             }, 'attendances', 'events.id', '=', 'attendances.event_id')
+            ->leftJoinSub(function ($query) {
+                $query->select('event_id', DB::raw('COUNT(*) as count'))
+                    ->from('registerevents')
+                    ->groupBy('event_id');
+            }, 'registrations', 'events.id', '=', 'registrations.event_id')
             ->get();
+
 
 
         $Item =  DB::select('SELECT event_name  from eventsapprovals  WHERE Approval_Status = ?', ["[APPROVED]"]);
 
-        return view("mentor-dashboard-content/view-event-index")->with(["Event_Data" => $EventData , "Search_Item" => $Item]);
+        return view("mentor-dashboard-content/view-event-index")->with(["Event_Data" => $EventData, "Search_Item" => $Item]);
     }
 
     public function viewEventsController()
@@ -402,17 +410,34 @@ class PageController extends Controller
         $session_id = Session::get('Session_Id');
         $currentDate = date('Y-m-d'); // Get the current date
 
-        $nonMarkedEvents = DB::table('events')
+        $nonMarkedEvents = DB::table('registerevents')
+            ->where('to_date', '>=', $currentDate)
+            ->where('user_id', $session_id) // Filter events for the specific user
+            ->whereNotExists(function ($query) use ($session_id) {
+                $query->select(DB::raw(1))
+                    ->from('eventsattendences')
+                    ->whereRaw('eventsattendences.event_id = registerevents.event_id')
+                    ->where('eventsattendences.user_id', $session_id);
+            })
+            ->get();
+
+
+
+        $nonRegisterEvents = DB::table('events')
             ->where('to_date', '>=', $currentDate) // Filter events that haven't ended yet
             ->whereNotIn('id', function ($query) use ($session_id) {
                 $query->select('event_id')
-                    ->from('eventsattendences')
+                    ->from('registerevents')
                     ->where('user_id', $session_id);
             })
             ->get();
 
-        return view("mentor-dashboard-content/view-events")->with(["Event_Data" => $nonMarkedEvents]);
+
+
+
+        return view("mentor-dashboard-content/view-events")->with(["Event_Data" => $nonMarkedEvents, "Event_Datas" => $nonRegisterEvents]);
     }
+
 
     public function ViewAttendanceLogController()
     {
@@ -497,7 +522,8 @@ class PageController extends Controller
         }
     }
 
-    public function StorePhotoController(Request $request){
+    public function StorePhotoController(Request $request)
+    {
 
         // $photoData = $request->photo_data;
         // $session_id = Session::get('Session_Id');
@@ -506,10 +532,35 @@ class PageController extends Controller
         //     $decodedImage = base64_decode($photoData);
         //     $filename = 'captured_photo_' . $session_id . '.jpg';
         //     Storage::disk('public')->put($filename, $decodedImage);
-            return redirect()->back()->with('message', 'Photo has been stored successfully');
-        }
+        return redirect()->back()->with('message', 'Photo has been stored successfully');
+    }
 
     //     return redirect()->back()->withErrors("Not Stored");
     // }
-}
 
+
+
+    public function ViewRegisterStudents($id)
+    {
+
+        $RegisterData = DB::table('registerevents')
+            ->join('user_account', 'registerevents.user_id', '=', 'user_account.staff_id')
+            ->where('registerevents.event_id', '=', $id)
+            ->select('user_account.username')
+            ->get();
+
+        return view("mentor-dashboard-content/view-register-students")->with(["register_data" => $RegisterData]);
+    }
+
+    public function ViewStudentAttendances($id)
+    {
+
+        $RegisterData = DB::table('eventsattendences')
+            ->join('user_account', 'eventsattendences.user_id', '=', 'user_account.staff_id')
+            ->where('eventsattendences.event_id', '=', $id)
+            ->select('user_account.username')
+            ->get();
+
+        return view("mentor-dashboard-content/view-student-attendances")->with(["register_data" => $RegisterData]);
+    }
+}

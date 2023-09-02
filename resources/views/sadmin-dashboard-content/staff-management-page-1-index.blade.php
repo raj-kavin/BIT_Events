@@ -46,7 +46,7 @@
     <div class="card">
         <div class="card-body">
 
-            <h3 class="panel-title" style="text-align:center; color:black; font-weight:bold;">Register Students</h3>
+            <h3 class="panel-title" style="text-align:center; color:black; font-weight:bold;">Register Users</h3>
             <br>
 
             <form action="/insert-staff-data" method="POST" enctype="multipart/form-data">

@@ -152,37 +152,37 @@
             <div class="wholeNavbar">
                 <li class="nav-item ">
                     <a class="nav" href="/view-staff-management-index">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Student List</span></a>
+                        <i class="fa-solid fa-users" style="font-size:20px"></i>
+                        <span>Users List</span></a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav" href="/view-attendance-log">
-                        <i class="fas fa-fw fa-database"></i>
+                        <i class="fa-regular fa-note-sticky" style="font-size:20px"></i>
                         <span>Attendance Log</span></a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav" href="/view-user-accounts-index">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fa-solid fa-user" style="font-size:20px"></i>
                         <span>Accounts Manage</span></a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav" href="/view-event-request">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fa-solid fa-code-pull-request" style="font-size:20px"></i>
                         <span>Events Request</span></a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav" href="/view-settings-index">
-                        <i class="fas fa-fw fa-cog"></i>
+                        <i class="fa-solid fa-gear" style="font-size:20px"></i>
                         <span>Settings</span></a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav" href="/handle-logout">
-                        <i class="fas fa-fw fa-power-off"></i>
+                        <i class="fa-solid fa-right-from-bracket" style="font-size:20px"></i>
                         <span>Logout</span></a>
                 </li>
             </div>
@@ -320,6 +320,7 @@
     <script src="{{ asset('dashboard-template') }}/sweetalert/sweetalert.min.js"></script>
     <script src="{{ asset('dashboard-template') }}/webcamjs/webcam.min.js"></script>
     <script src="{{ asset('dashboard-template') }}/main.js"></script>
+    <script src="https://kit.fontawesome.com/4b5150bf42.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
 

@@ -18,6 +18,7 @@ use Illuminate\Cache\DatabaseStore;
 |
 */
 
+
 Route::get('/', [PageController::class, 'ViewLoginPageController']);
 //[PageController::class, 'ViewLoginPageController']
 
@@ -30,6 +31,8 @@ Route::get('/handle-logout',[LoginController::class, 'HandleLogoutContoller']);
 Route::get('/view-staff-management-index',[PageController::class, 'ViewStaffManagementIndexController']);
 
 Route::post('/insert-staff-data',[DatabaseController::class, 'InsertStaffData']);
+
+Route::get('/register-event/{id}',[DatabaseController::class, 'RegisterEvent']);
 
 Route::get('/insert-event-attendance/{id}',[DatabaseController::class, 'InsertEventAttendance']);
 
@@ -97,6 +100,8 @@ Route::get('/view-events-approval/{id}',[PageController::class, 'ViewEventsAppro
 
 Route::get('/view-events',[PageController::class, 'ViewEventsController']);
 
+// Route::get('/view-register-events',[PageController::class, 'viewRegisterEventsController']);
+
 Route::get('/view-attendance-log',[PageController::class, 'ViewAttendanceLogController']);
 
 Route::get('/view-staff-attendances/{date_of_request}',[PageController::class, 'ViewStaffAttendancesController']);
@@ -108,5 +113,9 @@ Route::get('view-event-request',[PageController::class, 'ViewEventRequestControl
 Route::get('decline-event-request/{id}',[PageController::class, 'DeclineEventRequestController']);
 
 Route::get('accept-event-request/{id}',[PageController::class, 'AcceptEventRequestController']);
+
+Route::get('/view-event-attendances/{id}',[PageController::class, 'ViewStudentAttendances']);
+
+Route::get('/view-register-students/{id}',[PageController::class, 'ViewRegisterStudents']);
 
 ?>

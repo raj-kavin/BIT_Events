@@ -682,6 +682,7 @@ class DatabaseController extends Controller
         // $timeRange3Start = now()->setTime(19, 0, 0);  // 12:30 PM
         // $timeRange3End = now()->setTime(20, 0, 0);    // 1:30 PM
 
+
         if (
             ($currentTime >= $timeRange1Start && $currentTime <= $timeRange1End) ||
             ($currentTime >= $timeRange2Start && $currentTime <= $timeRange2End)
@@ -817,10 +818,13 @@ class DatabaseController extends Controller
     public function InsertEventAttendance($id)
     {
         $session_type = Session::get('Session_Type');
-        // $session_value = Session::get('Session_Value');
+
+
         $session_id = Session::get('Session_Id');
-        $id = $id;
-        $Eventname = DB::table('events')->where('id', $id)->value('id');
+
+
+        $Eventid = DB::table('events')->where('id', $id)->value('id');
+        $Eventname = DB::table('events')->where('id', $id)->value('event_name');
         $From_date = DB::table('events')->where('id', $id)->value('from_date');
         $To_date = DB::table('events')->where('id', $id)->value('to_date');
         $Venue = DB::table('events')->where('id', $id)->value('venue');
@@ -831,21 +835,20 @@ class DatabaseController extends Controller
 
 
             $S_id = $session_id;
+            $eventid = $Eventid;
             $eventname = $Eventname;
             $fromdate = $From_date;
             $todate = $To_date;
             $venue = $Venue;
 
 
-            // if (DB::insert('INSERT INTO leave_data (staff_id, type_of_leave, description, from_date, to_date, session,proof,  date_of_request, approval_status ) values (?, ?, ?, ?, ?, ?,?,?,?)', [$staff_id, $type_of_leave, $description, $from_date, $to_date, $session, $proof, $date_of_request, $approval_status])) {
+            if (DB::insert("INSERT INTO eventsattendences (user_id,event_id,event_name,from_date,to_date,venue) values (?,?,?,?,?,?)", [$S_id,$eventid, $eventname, $fromdate, $todate, $venue])) {
 
-            //     return redirect()->back()->with('message', 'Leave request has been submited successfully.');
-            // }
+                return redirect()->back()->with('message', 'Event attendence has Been marked');
 
-            if (DB::insert("INSERT INTO eventsattendences (user_id,event_id,from_date,to_date,venue) values (?,?,?,?,?)", [$S_id, $eventname, $fromdate, $todate, $venue])) {
-                return redirect()->back()->with('message', 'Event Attendance Has been Marked');
             }
         }
+
     }
 
 
@@ -947,7 +950,44 @@ class DatabaseController extends Controller
         }
     }
 
+    public function RegisterEvent($id){
+
+        $session_type = Session::get('Session_Type');
+        // $session_value = Session::get('Session_Value');
+        $session_id = Session::get('Session_Id');
+        $id = $id;
+        $Eventid = DB::table('events')->where('id', $id)->value('id');
+        $Eventname = DB::table('events')->where('id', $id)->value('event_name');
+        $From_date = DB::table('events')->where('id', $id)->value('from_date');
+        $To_date = DB::table('events')->where('id', $id)->value('to_date');
+        $Venue = DB::table('events')->where('id', $id)->value('venue');
 
 
+        if ($session_type == "student") {
+
+
+
+            $S_id = $session_id;
+            $eventid = $Eventid;
+            $eventname = $Eventname;
+            $fromdate = $From_date;
+            $todate = $To_date;
+            $venue = $Venue;
+
+
+            // if (DB::insert('INSERT INTO leave_data (staff_id, type_of_leave, description, from_date, to_date, session,proof,  date_of_request, approval_status ) values (?, ?, ?, ?, ?, ?,?,?,?)', [$staff_id, $type_of_leave, $description, $from_date, $to_date, $session, $proof, $date_of_request, $approval_status])) {
+
+            //     return redirect()->back()->with('message', 'Leave request has been submited successfully.');
+            // }
+
+            if (DB::insert("INSERT INTO registerevents (user_id,event_id,event_name,from_date,to_date,venue) values (?,?,?,?,?,?)", [$S_id,$eventid, $eventname, $fromdate, $todate, $venue])) {
+                return redirect()->back()->with('message', 'Event Has Been Registered');
+            }
+        }
+
+
+
+
+}
 
 }

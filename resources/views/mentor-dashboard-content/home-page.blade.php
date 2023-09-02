@@ -47,7 +47,7 @@
         <div class="card-body">
             <h3 class="panel-title" style="text-align:center;">Mark Attendence</h3>
             <br>
-            {{-- <form action="/insert-leave-data-of-staff-account" method="POST" enctype=”multipart/form-data> --}}
+
             @csrf
             <center>
                 <button style="background-color:#c54f4f" class="btn btn-warning text-white" id="accesscamera" data-toggle="modal" data-target="#photoModal">
@@ -117,7 +117,32 @@
         </div>
   </div>
 
+{{--
+  <pre>{{ json_encode($imgdata, JSON_PRETTY_PRINT) }}</pre> --}}
+
+<script>
+
+    // JavaScript code
+fetch('http://api.ipstack.com/check?access_key=YOUR_API_KEY')
+    .then(response => response.json())
+    .then(data => {
+        var userLocation = {
+            latitude: data.latitude,
+            longitude: data.longitude
+        };
+
+        console.log("Latitude: " + userLocation.latitude);
+        console.log("Longitude: " + userLocation.longitude);
+
+        // Use the location data as needed in your application.
+    })
+    .catch(error => {
+        console.error('Error getting location:', error);
+    });
+
+</script>
 
 
 
-    @endsection
+
+@endsection
